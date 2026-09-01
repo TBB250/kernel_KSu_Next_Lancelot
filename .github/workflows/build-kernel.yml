@@ -219,7 +219,8 @@ jobs:
                       CONFIG_WITH_KPROBES=n \
                       CONFIG_KPM=y \
                       CONFIG_KALLSYMS=y \
-                      CONFIG_KALLSYMS_ALL=y
+                      CONFIG_KALLSYMS_ALL=y \
+                      CONFIG_ASSISTANT_ENGINE=y
                      
         do
         echo "$config" >> arch/${{ env.KERNEL_ARCH }}/configs/${{ env.KERNEL_CONFIG }}
