@@ -178,7 +178,13 @@ jobs:
         if [ ${{ env.KSU_REVERT }} = true ]; then
             git apply $GITHUB_WORKSPACE/patches/KSU_REVERT.patch
         fi
-        
+
+    - name: Add configs from defconfig
+      run: |
+        cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
+        cat "$GITHUB_WORKSPACE/defconfig.env >> arch/${{ env.KERNEL_ARCH }}/configs/${{ env.KERNEL_CONFIG }}
+        echo "Succesfully put configs from defconfig.env to defconfig"
+    
     - name: Setup Configuration for Kernel
       run: |
         cd $GITHUB_WORKSPACE/kernel_workspace/android-kernel
