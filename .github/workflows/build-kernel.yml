@@ -411,6 +411,7 @@ jobs:
        draft: false
        prerelease: false
        files: |
+        kernel_workspace/boot.img
         kernel_workspace/AnyKernel3${{ env.LOCALVERSION }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}.zip
         kernel_workspace/${{ env.KERNEL_IMAGE_NAME }}${{ env.LOCALVERSION }}${{ env.UPLOADNAME }}-${{ env.DEVICE }}-${{ env.BUILD_TIME }}
        generate_release_notes: true
@@ -428,15 +429,4 @@ jobs:
        asset_path: kernel_workspace/android-kernel/out/arch/${{ env.KERNEL_ARCH }}/boot/dtbo.img
        asset_name: dtbo-${{ env.DEVICE }}-${{ env.BUILD_TIME }}.img
        asset_content_type: application/octet-stream
-    
-    
-    - name: Upload Boot Image to Release
-      if: env.MAKE_BOOT_IMAGE_IS_OK == 'true'
-      uses: actions/upload-release-asset@v1
-      env:
-       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-       upload_url: ${{ steps.create_release.outputs.upload_url }}
-       asset_path: kernel_workspace/boot.img
-       asset_name: boot${{ env.LOCALVERSION }}${{ env.UPLOADNAME }}-{{ env.DEVICE }}-${{ env.BUILD_TIME }}.img
-       asset_content_type: application/octet-stream
+       
